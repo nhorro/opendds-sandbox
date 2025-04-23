@@ -78,5 +78,5 @@ Estas rutas permiten la ejecuci√≥n de herramientas y aplicaciones sin instalaci√
 ## Additional resources
 
 - [OpenDDS 3.13.2 Github](https://github.com/OpenDDS/OpenDDS/tree/DDS-3.13.2)
-- [Official documentation for 3.13.2](https://github.com/OpenDDS/OpenDDS/releases/download/DDS-3.12/OpenDDS-3.12.pdf)
+- [OpenDDS Developer's Guide for OpenDDS 3.13.2](https://github.com/OpenDDS/OpenDDS/releases/download/DDS-3.12/OpenDDS-3.12.pdf)
 - [TAO y ACE](https://www.dre.vanderbilt.edu/~schmidt/TAO.html)

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  dds-server:
+    build: .
+    container_name: dds-subscriber
+    command: bash /app/run_subscriber.sh
+    networks:
+      - ddsnet
+
+  dds-client:
+    build: .
+    container_name: dds-publisher
+    command: bash /app/run_publisher.sh
+    networks:
+      - ddsnet
+    depends_on:
+      - dds-server
+
+networks:
+  ddsnet:

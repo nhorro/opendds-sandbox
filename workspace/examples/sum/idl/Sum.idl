@@ -1,0 +1,10 @@
+module SumModule {
+  struct SumRequest {
+    long a;
+    long b;
+  };
+
+  struct SumResponse {
+    long result;
+  };
+};

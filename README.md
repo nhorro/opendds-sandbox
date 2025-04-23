@@ -1,13 +1,13 @@
 # OpenDDS Docker Development Environment (Ubuntu 20.04 + CORBA)
 
-Este entorno proporciona una base controlada para experimentar con OpenDDS, incluyendo sus dependencias ACE y TAO (CORBA), en una configuración compatible con sistemas legacy que utilizan `DCPSInfoRepo`, `tao_cosnaming` e IORs. Está basado en Ubuntu 20.04 y compila directamente desde el código fuente oficial.
+Entorno para experimentar con OpenDDS, incluyendo sus dependencias ACE y TAO (CORBA), en una configuración compatible con sistemas legacy que utilizan `DCPSInfoRepo`, `tao_cosnaming` e IORs. Basado en Ubuntu 20.04. Se compila directamente desde el código fuente oficial.
 
 ## Contenido
 
-- Compilación completa de OpenDDS (versión estable desde GitHub)
+- [OpenDDS 3.13.2](https://github.com/OpenDDS/OpenDDS/tree/DDS-3.13.2).
 - Instalación de ACE/TAO como submódulo (dentro de `ACE_wrappers`)
 - Herramientas disponibles: `opendds_idl`, `tao_idl`, `DCPSInfoRepo`, `tao_cosnaming`, etc.
-- Variables de entorno configuradas automáticamente
+- Variables de entorno configuradas automáticamente.
 
 ## Uso básico
 

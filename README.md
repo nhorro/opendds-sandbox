@@ -1,53 +1,59 @@
-# OpenDDS Docker Development Environment (Ubuntu 20.04 + CORBA)
+# Legacy OpenDDS 3.13.2 Docker Development Environment
 
-Entorno para experimentar con OpenDDS, incluyendo sus dependencias ACE y TAO (CORBA), en una configuración compatible con sistemas legacy que utilizan `DCPSInfoRepo`, `tao_cosnaming` e IORs. Basado en Ubuntu 20.04. Se compila directamente desde el código fuente oficial.
+Environment to experiment with OpenDDS. Includes its dependencies ACE and TAO (CORBA), configured to be compatible with legacy systems that make use of `DCPSInfoRepo`, `tao_cosnaming` and IORs. Based in Ubuntu 20.04. OpenDDS is built from its official github repository.
 
-## Contenido
+## Contents
 
+- Ubuntu 20.04
 - [OpenDDS 3.13.2](https://github.com/OpenDDS/OpenDDS/tree/DDS-3.13.2).
-- Instalación de ACE/TAO como submódulo (dentro de `ACE_wrappers`)
-- Herramientas disponibles: `opendds_idl`, `tao_idl`, `DCPSInfoRepo`, `tao_cosnaming`, etc.
-- Variables de entorno configuradas automáticamente.
+- ACE/TAO installed as submodules (inside `ACE_wrappers`)
+- Available tools: `opendds_idl`, `tao_idl`, `DCPSInfoRepo`, `tao_cosnaming`, etc.
+- Environment variables automatically configured.
 
-## Uso básico
+## Basic usage
 
-### 1. Iniciar el contenedor en modo interactivo
+### 1. Build container (run only first time)
+
+~~~bash
+./build.sh
+~~~
+
+### 2. Start interactive container
 
 ```bash
 ./run.sh
 ```
+This mounts the `./workspace` directory inside the container.
 
-Esto monta la carpeta `./app` como directorio de trabajo dentro del contenedor. El contenedor no persiste: se elimina al salir.
-
-### 2. Compilar un archivo `.idl`
+### 3. Instructions to build `.idl` files
 
 ```bash
-cd /app
+cd /workspace
 
-# Paso 1: generar archivos DDS desde el IDL
+# Step 1: generate DDS files from IDL
 opendds_idl Sum.idl
 
-# Paso 2: generar archivos CORBA desde TypeSupport
+# Step 2: generate CORBA files from TypeSupport
 tao_idl SumTypeSupport.idl
 ```
 
-## Estructura de instalación
+## Installation paths
 
-A continuación se describen los directorios principales y su función:
+The following table describes the main paths and their content:
 
-| Ruta                                | Contenido                                                  |
-|-------------------------------------|-------------------------------------------------------------|
-| `/opt/OpenDDS`                      | Código fuente y herramientas de OpenDDS                    |
-| `/opt/OpenDDS/bin`                  | Ejecutables como `opendds_idl`, `DCPSInfoRepo`, etc.       |
-| `/opt/OpenDDS/lib`                  | Bibliotecas de OpenDDS                                     |
-| `/opt/OpenDDS/ACE_wrappers`        | Submódulo con ACE y TAO                                    |
-| `/opt/OpenDDS/ACE_wrappers/lib`    | Bibliotecas como `libACE.so`, `libTAO_*.so`, etc.          |
-| `/opt/OpenDDS/ACE_wrappers/TAO`    | Código fuente de TAO                                       |
+| Path                                    | Contents                                                   |
+|-----------------------------------------|------------------------------------------------------------|
+| `/opt/OpenDDS`                          | Código fuente y herramientas de OpenDDS                    |
+| `/opt/OpenDDS/bin`                      | Ejecutables como `opendds_idl`, `DCPSInfoRepo`, etc.       |
+| `/opt/OpenDDS/lib`                      | Bibliotecas de OpenDDS                                     |
+| `/opt/OpenDDS/ACE_wrappers`             | Submódulo con ACE y TAO                                    |
+| `/opt/OpenDDS/ACE_wrappers/lib`         | Bibliotecas como `libACE.so`, `libTAO_*.so`, etc.          |
+| `/opt/OpenDDS/ACE_wrappers/TAO`         | Código fuente de TAO                                       |
 | `/opt/OpenDDS/ACE_wrappers/TAO/TAO_IDL` | Librerías específicas para el compilador IDL de TAO   |
 
-## Variables de entorno relevantes
+## Relevant environment variables
 
-Estas variables están configuradas automáticamente al construir la imagen Docker:
+Estas variables están configuradas automáticamente al construir la imagen docker:
 
 ```bash
 export DDS_ROOT=/opt/OpenDDS
@@ -59,7 +65,7 @@ export LD_LIBRARY_PATH=$DDS_ROOT/lib:$ACE_ROOT/lib:$TAO_ROOT/TAO_IDL:$LD_LIBRARY
 
 Estas rutas permiten la ejecución de herramientas y aplicaciones sin instalación adicional en el sistema.
 
-## Herramientas disponibles
+## Available tools
 
 | Comando         | Función                                                  |
 |-----------------|----------------------------------------------------------|
@@ -69,20 +75,8 @@ Estas rutas permiten la ejecución de herramientas y aplicaciones sin instalaci�
 | `tao_cosnaming` | Naming Service CORBA                                     |
 
 
-## Notas sobre distribución
+## Additional resources
 
-Para generar una distribución portable de una aplicación basada en OpenDDS, se requiere incluir:
-
-1. Ejecutable(s) de la aplicación (`publisher`, `subscriber`, etc.)
-2. Bibliotecas compartidas necesarias (`libOpenDDS_*.so`, `libACE.so`, `libTAO_*.so`)
-3. Variables de entorno adecuadas (`LD_LIBRARY_PATH`)
-4. Archivos de configuración si se utiliza `DCPSInfoRepo` o `RTPS`
-
-Se recomienda construir contenedores dedicados o empaquetar usando herramientas como AppImage o CPack para evitar conflictos de dependencias en sistemas destino.
-
-
-## Recursos adicionales
-
-- [OpenDDS GitHub](https://github.com/OpenDDS/OpenDDS)
-- [Documentación oficial](https://opendds.readthedocs.io/)
+- [OpenDDS 3.13.2 Github](https://github.com/OpenDDS/OpenDDS/tree/DDS-3.13.2)
+- [Official documentation for 3.13.2]([https://opendds.readthedocs.io/](https://github.com/OpenDDS/OpenDDS/releases/download/DDS-3.12/OpenDDS-3.12.pdf))
 - [TAO y ACE](https://www.dre.vanderbilt.edu/~schmidt/TAO.html)

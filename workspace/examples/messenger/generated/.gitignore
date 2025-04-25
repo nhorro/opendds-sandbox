@@ -1,0 +1,5 @@
+# Generated
+*.cpp
+*.h
+*.inl
+*.idl

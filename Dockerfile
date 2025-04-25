@@ -34,4 +34,15 @@ ENV LD_LIBRARY_PATH=$DDS_ROOT/lib:$ACE_ROOT/lib:$TAO_ROOT/TAO_IDL:$LD_LIBRARY_PA
 
 ENV PATH=$DDS_ROOT/bin:$DDS_ROOT/ACE_wrappers/TAO/TAO_IDL:$PATH
 
-WORKDIR /app
+# Crear usuario no-root con UID/GID del host (esto se setea en tiempo de build con ARGs)
+ARG USERNAME=devuser
+ARG USER_UID=1000
+ARG USER_GID=1000
+
+RUN groupadd --gid $USER_GID $USERNAME && \
+    useradd --uid $USER_UID --gid $USER_GID --create-home $USERNAME && \
+    chown -R $USERNAME:$USERNAME /opt/OpenDDS
+
+USER $USERNAME
+ENV HOME=/home/$USERNAME
+WORKDIR /workspace

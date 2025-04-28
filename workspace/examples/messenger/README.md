@@ -1,5 +1,8 @@
 # Messenger example
 
+![deployment](./doc/assets/deployment-tao-discovery.png)
+
+
 **Build instructions**
 
 1. Build IDL files:
@@ -26,7 +29,7 @@ Three terminals are needed:
 
 ~~~bash
 ./run.sh # Start docker
-cd workspace/examples/messenger/build
+cd examples/messenger/build
 DCPSInfoRepo -o simple.ior
 ~~~
 
@@ -34,14 +37,14 @@ DCPSInfoRepo -o simple.ior
 
 ~~~bash
 ./run.sh # Start docker
-cd workspace/examples/messenger/build
-subscriber -DCPSInfoRepo file://simple.ior
+cd examples/messenger/build
+./subscriber -DCPSInfoRepo file://simple.ior
 ~~~
 
 2. Terminal 3 - Publisher
 
 ~~~bash
 ./run.sh # Start docker
-cd workspace/examples/messenger/build
-publisher -DCPSInfoRepo file://simple.ior
+cd examples/messenger/build
+./publisher -DCPSInfoRepo file://simple.ior
 ~~~

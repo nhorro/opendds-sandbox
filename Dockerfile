@@ -34,6 +34,26 @@ ENV LD_LIBRARY_PATH=$DDS_ROOT/lib:$ACE_ROOT/lib:$TAO_ROOT/TAO_IDL:$LD_LIBRARY_PA
 
 ENV PATH=$DDS_ROOT/bin:$DDS_ROOT/ACE_wrappers/TAO/TAO_IDL:$PATH
 
+#------------------------------------------------------------------------------------------------
+# TAO cosnaming
+#------------------------------------------------------------------------------------------------
+
+# Generate Makefiles for TAO tools using MPC
+RUN cd /opt/OpenDDS && \
+    export MPC_ROOT=/opt/OpenDDS/ACE_wrappers/MPC && \
+    export DDS_ROOT=/opt/OpenDDS && \
+    export ACE_ROOT=/opt/OpenDDS/ACE_wrappers && \
+    export TAO_ROOT=$ACE_ROOT/TAO && \
+    cd /opt/OpenDDS/ACE_wrappers/TAO/orbsvcs/ && \
+    $ACE_ROOT/bin/mwc.pl -type gnuace -features xerces3=1 && \
+    make -j$(nproc) 
+
+RUN ln -s $TAO_ROOT/orbsvcs/Naming_Service/tao_cosnaming /usr/local/bin/tao_cosnaming && \
+    ln -s $TAO_ROOT/orbsvcs/IFR_Service/tao_ifr_service /usr/local/bin/tao_ifr_service && \
+    ln -s $TAO_ROOT/orbsvcs/ImplRepo_Service/implrepo_service /usr/local/bin/implrepo_service
+
+#------------------------------------------------------------------------------------------------    
+
 # Crear usuario no-root con UID/GID del host (esto se setea en tiempo de build con ARGs)
 ARG USERNAME=devuser
 ARG USER_UID=1000

@@ -1,4 +1,4 @@
-# Legacy OpenDDS 3.13.2 Docker Development Environment
+# Legacy OpenDDS 3.13.2 docker development environment
 
 Environment to experiment with OpenDDS. Includes its dependencies ACE and TAO (CORBA), configured to be compatible with legacy systems that make use of `DCPSInfoRepo`, `tao_cosnaming` and IORs. Based in Ubuntu 20.04. OpenDDS is built from its official github repository.
 

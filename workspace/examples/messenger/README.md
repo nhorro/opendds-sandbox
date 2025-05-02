@@ -1,17 +1,16 @@
 # Messenger example
 
-![deployment](./doc/assets/deployment-tao-discovery.png)
-
+This is the Messenger example from the original [OpenDDS Developer's Guide for OpenDDS 3.13.2](https://github.com/OpenDDS/OpenDDS/releases/download/DDS-3.12/OpenDDS-3.12.pdf).
 
 ## Build instructions
 
-1. Build IDL files:
+1. Build IDL files. The first parameter is the path were the IDL files are located and the second the destination of the generated files. 
 
 ~~~bash
 ./generate_dds_types.sh idl generated
 ~~~
 
-2. Build with CMake:
+2. Build publisher and subscriber with CMake:
 
 ~~~bash
 mkdir build
@@ -59,6 +58,8 @@ cd examples/messenger/build
 
 ### Option 2. With DCPS Inforepo and TAO Naming Service
 
+This is a more realistic scenario of how a real distributed application is deployed, were processs do not share the same node. In this case, each service has been assigned a different node:
+
 | Node               | IP         | Port  |
 |--------------------|------------|-------|
 | TAO Naming Service | 172.30.0.2 | 2809  |
@@ -66,6 +67,7 @@ cd examples/messenger/build
 | Subscriber         | 172.30.0.4 | N/A   |
 | Publisher          | 172.30.0.5 | N/A   |
 
+![deployment](./doc/assets/deployment-tao-discovery.png)
 
 Create network (once):
 
